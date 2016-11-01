@@ -12,6 +12,7 @@ val credentialsPath: File = Path.userHome / "nexus.cred"
 lazy val publicationSettings = if (credentialsPath.exists()) Seq(
 	publishTo := {
 		val nexus = "http://callisto.anchormen.local:8081/nexus"
+
 		if (version.value.endsWith("SNAPSHOT"))
 			Some("snapshots" at nexus + "/content/repositories/snapshots")
 		else
@@ -19,7 +20,6 @@ lazy val publicationSettings = if (credentialsPath.exists()) Seq(
 	},
 	publishMavenStyle := true,
 	publishArtifact in Test := false,
-
 	credentials += Credentials(credentialsPath)
 ) else Nil
 
