@@ -1,7 +1,7 @@
-package nl.anchormen
+package nl.anchormen.sbt
 
+import sbt.Keys._
 import sbt._
-import Keys._
 
 /**
   * Created by lawrence on 11-10-16.
