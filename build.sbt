@@ -13,7 +13,7 @@ lazy val publicationSettings = if (credentialsPath.exists()) Seq(
 	publishTo := {
 		val nexus = "http://callisto.anchormen.local:8081/nexus"
 
-		if (version.value.endsWith("SNAPSHOT"))
+		if (isSnapshot.value)
 			Some("snapshots" at nexus + "/content/repositories/snapshots")
 		else
 			Some("releases"  at nexus + "/content/repositories/releases")
