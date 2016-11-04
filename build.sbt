@@ -16,7 +16,7 @@ lazy val publicationSettings = if (credentialsPath.exists()) Seq(
 		if (isSnapshot.value)
 			Some("snapshots" at nexus + "/content/repositories/snapshots")
 		else
-			Some("releases"  at nexus + "/content/repositories/releases")
+			Some("releases" at nexus + "/content/repositories/releases")
 	},
 	publishMavenStyle := true,
 	publishArtifact in Test := false,
