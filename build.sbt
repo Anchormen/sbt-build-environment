@@ -1,6 +1,6 @@
 name := "sbt-build-environments"
 organization := "nl.anchormen.sbt"
-version := "0.1.2-SNAPSHOT"
+version := "0.1.3-SNAPSHOT"
 scalaVersion := "2.10.6"
 scalacOptions += "-feature"
 scalacOptions += "-deprecation"
