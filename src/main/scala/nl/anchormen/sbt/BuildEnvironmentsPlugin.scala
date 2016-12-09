@@ -2,17 +2,18 @@ package nl.anchormen.sbt
 
 import sbt.Keys._
 import sbt._
+import sbt.plugins.JvmPlugin
 
 /**
   * Created by lawrence on 11-10-16.
   */
 object BuildEnvironmentsPlugin extends AutoPlugin {
-	override def requires = plugins.JvmPlugin
-	override def trigger = allRequirements
+	override def requires: JvmPlugin.type = plugins.JvmPlugin
+	override def trigger: PluginTrigger = allRequirements
 
 	object autoImport {
-		lazy val Dev = config("dev") extend Runtime
-		lazy val Prod = config("prod") extend Runtime
+		lazy val Dev: Configuration = config("dev") extend Compile
+		lazy val Prod: Configuration = config("prod") extend Compile
 	}
 
 	import autoImport._
@@ -27,21 +28,14 @@ object BuildEnvironmentsPlugin extends AutoPlugin {
 			unmanagedResourceDirectories := (unmanagedResourceDirectories in Compile).value
 		)
 
-	lazy val baseDevSettings: Seq[Def.Setting[_]] = baseSettings ++
-		Seq(unmanagedResourceDirectories += baseDirectory.value / "src" / "dev" / "resources")
-
-	lazy val baseProdSettings: Seq[Def.Setting[_]] = baseSettings ++
-		Seq(unmanagedResourceDirectories += baseDirectory.value / "src" / "prod" / "resources")
-
-	override lazy val projectSettings = inConfig(Dev)(baseDevSettings) ++ inConfig(Prod)(baseProdSettings)
+	lazy val baseDevSettings: Seq[Def.Setting[_]] = EnvironmentSettings("dev")
+	lazy val baseProdSettings: Seq[Def.Setting[_]] = EnvironmentSettings("prod")
+	override lazy val projectSettings: Seq[Def.Setting[_]] = inConfig(Dev)(baseDevSettings) ++ inConfig(Prod)(baseProdSettings)
 }
 
-//object EnvironmentSettings {
-//	def apply(resources: Seq[File]): Seq[File] = {
-//		for (resource <- resources) {
-//			println(s"${resource.name}")
-//		}
-//
-//		resources
-//	}
-//}
+object EnvironmentSettings {
+	def apply(name: String): Seq[Def.Setting[_]] = {
+		BuildEnvironmentsPlugin.baseSettings ++
+			Seq(unmanagedResourceDirectories += baseDirectory.value / "src" / name / "resources")
+	}
+}
