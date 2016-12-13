@@ -38,4 +38,10 @@ object EnvironmentSettings {
 		BuildEnvironmentsPlugin.baseSettings ++
 			Seq(unmanagedResourceDirectories += baseDirectory.value / "src" / name / "resources")
 	}
+
+	def addConfiguration(name: String): Seq[Def.Setting[_]] = {
+		val NewConfig: Configuration = config(name) extend Compile
+		val baseConfigSettings: Seq[Def.Setting[_]] = EnvironmentSettings(name)
+		inConfig(NewConfig)(baseConfigSettings)
+	}
 }
