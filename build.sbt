@@ -7,21 +7,10 @@ scalacOptions += "-deprecation"
 sbtPlugin := true
 resolvers += Resolver.jcenterRepo
 
-val credentialsPath: File = Path.userHome / "nexus.cred"
-
-lazy val publicationSettings = if (credentialsPath.exists()) Seq(
-	publishTo := {
-		val nexus = "http://callisto.anchormen.local:8081/nexus"
-
-		if (isSnapshot.value)
-			Some("snapshots" at nexus + "/content/repositories/snapshots")
-		else
-			Some("releases" at nexus + "/content/repositories/releases")
-	},
+lazy val publicationSettings = Seq(
 	publishMavenStyle := true,
-	publishArtifact in Test := false,
-	credentials += Credentials(credentialsPath)
-) else Nil
+	publishArtifact in Test := false
+)
 
 lazy val app = (project in file("."))
 	.settings(publicationSettings)
