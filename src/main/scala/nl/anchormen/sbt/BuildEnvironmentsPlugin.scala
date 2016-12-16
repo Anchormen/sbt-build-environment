@@ -34,14 +34,8 @@ object BuildEnvironmentsPlugin extends AutoPlugin {
 }
 
 object EnvironmentSettings {
-	def apply(name: String): Seq[Def.Setting[_]] = {
+	def apply(environmentName: String): Seq[Def.Setting[_]] = {
 		BuildEnvironmentsPlugin.baseSettings ++
-			Seq(unmanagedResourceDirectories += baseDirectory.value / "src" / name / "resources")
-	}
-
-	def addConfiguration(name: String): Seq[Def.Setting[_]] = {
-		val NewConfig: Configuration = config(name) extend Compile
-		val baseConfigSettings: Seq[Def.Setting[_]] = EnvironmentSettings(name)
-		inConfig(NewConfig)(baseConfigSettings)
+			Seq(unmanagedResourceDirectories += baseDirectory.value / "src" / environmentName / "resources")
 	}
 }
