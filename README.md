@@ -9,8 +9,12 @@ Build environments enable different resource configurations to be written and ma
 user visible strings. These are then used automagically depending on the active environment.
 
 ## Usage
-Add the following line to your `project/plugins.sbt`
+Add the following lines to your `project/plugins.sbt`
 ```
+resolvers += Resolver.url(
+	"bintray-anchormen-sbt-plugins",
+	url("http://dl.bintray.com/anchormen/sbt-plugins"))(
+	Resolver.ivyStylePatterns)
 addSbtPlugin("nl.anchormen.sbt" %% "sbt-build-environments" % "0.1.6")
 ```
 
