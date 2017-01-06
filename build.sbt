@@ -1,6 +1,6 @@
 lazy val bintraySettings = Seq(
-	bintrayRepository in bintray	:= "sbt-plugins",
-	bintrayOrganization in bintray	:= Some("anchormen")
+	bintrayOrganization in ThisBuild		:= Some("anchormen"),
+	bintrayReleaseOnPublish in ThisBuild	:= false
 )
 
 lazy val scalaSettings = Seq(
@@ -20,7 +20,7 @@ lazy val pluginSettings = Seq(
 	name								:= "sbt-build-environments",
 	organization						:= "nl.anchormen.sbt",
 	sbtPlugin							:= true,
-	version								:= "0.1.4"
+	version								:= "0.1.5"
 )
 
 lazy val publicationSettings = Seq(
