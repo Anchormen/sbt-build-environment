@@ -1,3 +1,8 @@
+lazy val bintraySettings = Seq(
+	bintrayRepository in bintray	:= "sbt-plugins",
+	bintrayOrganization in bintray	:= Some("anchormen")
+)
+
 lazy val scalaSettings = Seq(
 	scalacOptions	+= "-feature",
 	scalacOptions	+= "-deprecation",
@@ -5,9 +10,8 @@ lazy val scalaSettings = Seq(
 )
 
 lazy val pluginSettings = Seq(
-	fork in Test						:= false,
 	ivyScala							:= ivyScala.value map { _.copy(overrideScalaVersion = true) },
-	logBuffered in Test					:= false,
+	licenses += ("MIT", url("https://opensource.org/licenses/MIT")),
 	mappings in (Compile, packageBin)	~= {
 		_.filterNot {
 			case (file, filename) => file.isDirectory && filename.equalsIgnoreCase("example")
@@ -15,18 +19,25 @@ lazy val pluginSettings = Seq(
 	},
 	name								:= "sbt-build-environments",
 	organization						:= "nl.anchormen.sbt",
-	parallelExecution in Test			:= false,
 	sbtPlugin							:= true,
 	version								:= "0.1.3"
 )
 
 lazy val publicationSettings = Seq(
-	publishMavenStyle		:= true,
-	publishArtifact in Test	:= false
+	fork in Test		:= false,
+	publishMavenStyle	:= false
+)
+
+lazy val testSettings = Seq(
+	logBuffered in Test			:= false,
+	parallelExecution in Test	:= false,
+	publishArtifact in Test		:= false
 )
 
 lazy val plugin = project
     .in(file("."))
+	.settings(bintraySettings)
 	.settings(pluginSettings)
-	.settings(scalaSettings)
 	.settings(publicationSettings)
+	.settings(scalaSettings)
+	.settings(testSettings)
