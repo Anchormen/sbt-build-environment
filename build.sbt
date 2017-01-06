@@ -20,7 +20,7 @@ lazy val pluginSettings = Seq(
 	name								:= "sbt-build-environments",
 	organization						:= "nl.anchormen.sbt",
 	sbtPlugin							:= true,
-	version								:= "0.1.3"
+	version								:= "0.1.4"
 )
 
 lazy val publicationSettings = Seq(
