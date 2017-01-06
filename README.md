@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/anchormen/sbt-plugins/sbt-build-environments/images/download.svg) ](https://bintray.com/anchormen/sbt-plugins/sbt-build-environments/_latestVersion)
+
 # Use build environments in SBT
 
 ## Description
@@ -9,7 +11,7 @@ user visible strings. These are then used automagically depending on the active 
 ## Usage
 Add the following line to your `project/plugins.sbt`
 ```
-addSbtPlugin("nl.anchormen.sbt" %% "sbt-build-environments" % "0.1.4")
+addSbtPlugin("nl.anchormen.sbt" %% "sbt-build-environments" % "0.1.6")
 ```
 
 Two build environments are defined, `dev` and `prod`. These define the `development` and `production` build environments,

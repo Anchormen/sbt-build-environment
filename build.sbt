@@ -11,7 +11,7 @@ lazy val scalaSettings = Seq(
 
 lazy val pluginSettings = Seq(
 	ivyScala							:= ivyScala.value map { _.copy(overrideScalaVersion = true) },
-	licenses += ("MIT", url("https://opensource.org/licenses/MIT")),
+	licenses							+= ("MIT", url("https://opensource.org/licenses/MIT")),
 	mappings in (Compile, packageBin)	~= {
 		_.filterNot {
 			case (file, filename) => file.isDirectory && filename.equalsIgnoreCase("example")
@@ -24,11 +24,11 @@ lazy val pluginSettings = Seq(
 )
 
 lazy val publicationSettings = Seq(
-	fork in Test		:= false,
-	publishMavenStyle	:= false
+	publishMavenStyle := false
 )
 
 lazy val testSettings = Seq(
+	fork in Test				:= false,
 	logBuffered in Test			:= false,
 	parallelExecution in Test	:= false,
 	publishArtifact in Test		:= false
