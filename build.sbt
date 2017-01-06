@@ -11,7 +11,7 @@ lazy val scalaSettings = Seq(
 
 lazy val pluginSettings = Seq(
 	ivyScala							:= ivyScala.value map { _.copy(overrideScalaVersion = true) },
-	licenses += ("MIT", url("https://opensource.org/licenses/MIT")),
+	licenses							+= ("MIT", url("https://opensource.org/licenses/MIT")),
 	mappings in (Compile, packageBin)	~= {
 		_.filterNot {
 			case (file, filename) => file.isDirectory && filename.equalsIgnoreCase("example")
@@ -20,15 +20,15 @@ lazy val pluginSettings = Seq(
 	name								:= "sbt-build-environments",
 	organization						:= "nl.anchormen.sbt",
 	sbtPlugin							:= true,
-	version								:= "0.1.5"
+	version								:= "0.1.6"
 )
 
 lazy val publicationSettings = Seq(
-	fork in Test		:= false,
-	publishMavenStyle	:= false
+	publishMavenStyle := false
 )
 
 lazy val testSettings = Seq(
+	fork in Test				:= false,
 	logBuffered in Test			:= false,
 	parallelExecution in Test	:= false,
 	publishArtifact in Test		:= false
